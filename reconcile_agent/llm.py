@@ -97,12 +97,14 @@ def _best_source_match(target_field: str, source_fields: set[str]) -> str | None
     if nt in norm_sources:
         return norm_sources[nt]
     for ns, original in norm_sources.items():
-        if nt in ns or ns in nt:
+        # Substring matches are intentionally conservative to avoid fields like
+        # "e" matching "email" or arbitrary source names containing one letter.
+        if len(nt) >= 3 and len(ns) >= 3 and (nt in ns or ns in nt):
             return original
     for syn in _SYNONYMS.get(nt, set()):
-        if syn in norm_sources:
+        if len(syn) >= 3 and syn in norm_sources:
             return norm_sources[syn]
         for ns, original in norm_sources.items():
-            if syn in ns:
+            if len(syn) >= 3 and len(ns) >= 3 and syn in ns:
                 return original
     return None

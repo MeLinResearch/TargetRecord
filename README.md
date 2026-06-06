@@ -93,3 +93,13 @@ Built as a compact demonstration of the pattern behind production data-integrati
 ## License
 
 MIT
+
+## Tests
+
+Run:
+
+```bash
+pytest
+```
+
+The test suite covers deterministic validation, agent escalation behavior, and offline fallback mapping. External LLM calls are mocked or bypassed.
