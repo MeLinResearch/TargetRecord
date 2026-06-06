@@ -1,0 +1,9 @@
+{
+  "fields": {
+    "full_name":   { "type": "string",  "required": true },
+    "email":       { "type": "email",   "required": true },
+    "amount":      { "type": "number",  "required": false },
+    "signup_date": { "type": "date",    "required": true },
+    "active":      { "type": "boolean", "required": false }
+  }
+}
