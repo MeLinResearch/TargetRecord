@@ -54,7 +54,7 @@ The key design decision: **the LLM only proposes the mapping. It never touches t
 No API key required. The mapping proposer falls back to a deterministic heuristic matcher so the demo runs offline:
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/MeLinResearch/Reconcile.git>
 cd reconcile
 python -m examples.run_demo
 ```
