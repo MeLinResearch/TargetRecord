@@ -103,6 +103,8 @@ def _best_source_match(target_field: str, source_fields: set[str]) -> str | None
         if syn in norm_sources:
             return norm_sources[syn]
         for ns, original in norm_sources.items():
-            if syn in ns:
+            # Avoid one-character synonyms matching arbitrary words that merely
+            # contain the character, such as email's "e" matching "favorite".
+            if len(syn) > 1 and syn in ns:
                 return original
     return None
