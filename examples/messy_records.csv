@@ -1,0 +1,7 @@
+Customer Name,E-Mail,Total,Created,Status
+Jane Doe,JANE@EXAMPLE.COM,"1,250.00",01/15/2024,active
+Bob Smith,bob@example.com,$980,2024-02-03,active
+Maria Garcia,maria@example.com,2300,Mar 9 2024,inactive
+Wei Chen,not-an-email,450.50,03/22/2024,active
+Aisha Khan,aisha@example.com,"1,100",2024/04/01,active
+Tom Brown,tom@example.com,,April 5, 2024,inactive
