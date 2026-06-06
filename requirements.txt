@@ -1,0 +1,3 @@
+# Core runs on the Python standard library alone.
+# Install anthropic only if you want Claude to drive the mapping step:
+anthropic>=0.40.0
