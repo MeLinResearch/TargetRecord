@@ -98,13 +98,13 @@ def _best_source_match(target_field: str, source_fields: set[str]) -> str | None
         return norm_sources[nt]
     for ns, original in norm_sources.items():
         # Substring matches are intentionally conservative to avoid fields like
-        # "e" matching "email" or arbitrary source names containing one letter.
-        if len(nt) > 1 and len(ns) > 1 and (nt in ns or ns in nt):
+        # "e" or "em" matching "email" through generic partial matching.
+        if len(nt) >= 3 and len(ns) >= 3 and (nt in ns or ns in nt):
             return original
     for syn in _SYNONYMS.get(nt, set()):
-        if len(syn) > 1 and syn in norm_sources:
+        if len(syn) >= 3 and syn in norm_sources:
             return norm_sources[syn]
         for ns, original in norm_sources.items():
-            if len(syn) > 1 and syn in ns:
+            if len(syn) >= 3 and len(ns) >= 3 and syn in ns:
                 return original
     return None
