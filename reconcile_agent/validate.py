@@ -25,11 +25,14 @@ def coerce_value(raw: Any, target_type: str) -> Any:
         return s
 
     if target_type == "integer":
-        cleaned = re.sub(r"[,_\s]", "", s)
+        cleaned = re.sub(r"[,$_\s]", "", s)
         try:
-            return int(float(cleaned))
+            number = float(cleaned)
         except ValueError:
             return None
+        if not number.is_integer():
+            return None
+        return int(number)
 
     if target_type == "number":
         cleaned = re.sub(r"[,$_\s]", "", s)
