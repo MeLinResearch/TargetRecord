@@ -47,6 +47,16 @@ def test_one_character_source_field_does_not_match_email_by_generic_substring(mo
     assert mapping == {"email": {"source": None, "type": "email"}}
 
 
+def test_two_character_source_field_does_not_match_email_by_generic_substring(monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    schema = {"fields": {"email": {"type": "email", "required": True}}}
+    sample = [{"em": "not actually email", "favorite_color": "blue"}]
+
+    mapping = propose_mapping(sample=sample, target_schema=schema)
+
+    assert mapping == {"email": {"source": None, "type": "email"}}
+
+
 def test_offline_mode_without_anthropic_api_key_returns_deterministic_mapping(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     schema = {
