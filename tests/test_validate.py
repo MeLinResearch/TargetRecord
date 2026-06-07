@@ -10,11 +10,22 @@ from reconcile_agent.validate import coerce_value, validate_record
 def test_number_and_currency_coercion_for_number_and_integer_fields():
     amount = coerce_value("$1,250.00", "number")
     count = coerce_value("1,250", "integer")
+    currency_count = coerce_value("$1,250.00", "integer")
 
     assert amount == 1250.0
     assert validate_record({"amount": amount}, {"fields": {"amount": {"type": "number", "required": True}}}) == []
     assert count == 1250
+    assert currency_count == 1250
     assert validate_record({"count": count}, {"fields": {"count": {"type": "integer", "required": True}}}) == []
+
+
+def test_integer_coercion_rejects_fractional_values_instead_of_truncating():
+    count = coerce_value("1.9", "integer")
+
+    assert count is None
+    assert validate_record({"count": count}, {"fields": {"count": {"type": "integer", "required": True}}}) == [
+        "missing required field 'count'"
+    ]
 
 
 def test_bad_email_fails_validation_after_coercion():
